@@ -1,0 +1,41 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=1234567890
+      - APP_DB_USER=docker
+      - APP_DB_PASS=docker
+      - APP_DB_NAME=docker
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
+  nodejs-server:
+    build:
+      context: ./api
+    ports:
+      - "3080:3080"
+    container_name: node-api
+    volumes:
+      - ./api:/usr/src/app/api
+      - /usr/src/app/api/node_modules
+  react-ui:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+
+
