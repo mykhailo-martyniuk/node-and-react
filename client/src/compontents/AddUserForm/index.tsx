@@ -120,8 +120,8 @@ const AddUserForm: React.FC<{
 
             <MultipleSelect name="groups" value={props.values.groups} />
             <Button
-              buttonType={"Add"}
-              text={"Add"}
+              buttonType={user ? "Edit" :"Add"}
+              text={user ? "Edit" :"Add"}
               type="submit"
               style={{ width: "100%", marginTop: "30px" }}
             />

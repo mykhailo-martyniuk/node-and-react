@@ -35,6 +35,10 @@ export default function TableUsers({ editModalSwitcher = (arg: any) => {} }) {
     return <div>Error</div>;
   }
 
+  if (users.length === 0) {
+    return <div>Users absent</div>;
+  }
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: "100%" }}>

@@ -113,8 +113,8 @@ const GroupForm: React.FC<{
             />
 
             <Button
-              buttonType={"Add"}
-              text={"Add"}
+              buttonType={group ? "Edit" :"Add"}
+              text={group ? "Edit" :"Add"}
               type="submit"
               style={{ width: "100%" }}
             />
